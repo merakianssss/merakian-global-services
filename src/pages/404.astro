@@ -1,0 +1,45 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+---
+
+<PageLayout
+  title="Merakian Global - Page Not Found"
+  description="The page you are looking for could not be found. Return to our homepage or explore our services."
+>
+  <section class="relative pt-40 pb-32 px-margin-mobile lg:px-margin-desktop max-w-container mx-auto min-h-[80vh] flex items-center">
+    <div class="relative z-10 w-full text-center">
+      <span class="material-symbols-outlined text-primary text-7xl mb-6 block" style="font-variation-settings: 'FILL' 0;">
+        flight_takeoff
+      </span>
+      <p class="font-hanken-grotesk text-label-lg text-primary uppercase mb-4 tracking-widest font-semibold">
+        Flight Path Diverted
+      </p>
+      <h1 class="font-libre-caslon text-display-lg-mobile md:text-display-lg text-white mb-6">
+        Page <span class="text-primary">Not Found</span>
+      </h1>
+      <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-stack-lg">
+        The destination you are looking for could not be located. Let us help you navigate back to a familiar route.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/"
+          class="bg-gradient-to-r from-primary to-gold-pressed text-rich-black font-hanken-grotesk text-label-lg uppercase px-8 py-4 rounded-sm gold-glow transition-all font-semibold"
+        >
+          Return Home
+        </a>
+        <a
+          href="/services"
+          class="border border-white/10 hover:border-primary text-white font-hanken-grotesk text-label-lg uppercase px-8 py-4 rounded-sm transition-all font-semibold"
+        >
+          Explore Services
+        </a>
+        <a
+          href="/contact"
+          class="border border-white/10 hover:border-primary text-white font-hanken-grotesk text-label-lg uppercase px-8 py-4 rounded-sm transition-all font-semibold"
+        >
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,163 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/Hero.astro';
+import KPIBlock from '../components/KPIBlock.astro';
+
+const whyUsCards = [
+  {
+    icon: 'handshake',
+    title: 'Professional Coordination',
+    description: 'Seamless execution of your travel and career ambitions with expert guidance.',
+  },
+  {
+    icon: 'public',
+    title: 'Global Reach',
+    description: 'Access opportunities worldwide through our established international network.',
+  },
+  {
+    icon: 'support_agent',
+    title: 'Personalized Support',
+    description: 'Tailored solutions designed to meet your specific individual or corporate needs.',
+  },
+  {
+    icon: 'verified',
+    title: 'Transparent Process',
+    description: 'Clear, ethical, and reliable methodologies ensuring peace of mind.',
+  },
+  {
+    icon: 'description',
+    title: 'Document-Focused Workflow',
+    description: 'Meticulous handling of all necessary documentation and compliance requirements.',
+  },
+  {
+    icon: 'hub',
+    title: 'Experienced Industry Network',
+    description: 'Leveraging deep connections across sectors for optimal placement and service.',
+  },
+  {
+    icon: 'person',
+    title: 'Candidate-Centric Support',
+    description: 'Prioritizing candidate well-being and success throughout the placement journey.',
+  },
+  {
+    icon: 'all_inclusive',
+    title: 'Long-Term Assistance',
+    description: 'Ongoing support extending beyond initial placement or travel completion.',
+  },
+];
+
+const services = [
+  {
+    category: 'Aviation & Travel',
+    title: 'Air Ticketing & Consultation',
+    description: 'Bespoke travel itineraries and seamless ticketing solutions.',
+  },
+  {
+    category: 'Professional Growth',
+    title: 'Career Consultations',
+    description: 'Strategic guidance for international career placement.',
+  },
+  {
+    category: 'Corporate Solutions',
+    title: 'Recruitment & Logistics',
+    description: 'End-to-end manpower solutions and operational logistics.',
+  },
+  {
+    category: 'Logistics',
+    title: 'Courier Services',
+    description: 'Reliable global courier and document handling.',
+  },
+];
+
+const kpiStats = [
+  { value: '[Pending]', label: 'Countries Reached' },
+  { value: '[Pending]', label: 'Years Experience' },
+  { value: '[Pending]', label: 'Professionals Placed' },
+];
+---
+
+<PageLayout title="Merakian Global Services - Your Journey, Our Expertise">
+  <Hero
+    title="Your Journey, Our Expertise"
+    subtitle="Bridging tradition with modern efficiency across Travel, Careers, Manpower, and Courier solutions globally."
+    backgroundImage="/images/hero-home.jpg"
+  />
+
+  <!-- Divider -->
+  <div class="flight-path max-w-container mx-auto opacity-50"></div>
+
+  <!-- Why Us Section -->
+  <section class="py-stack-xl px-6 md:px-margin-mobile lg:px-margin-desktop max-w-container mx-auto">
+    <div class="text-center mb-stack-xl">
+      <h2 class="font-libre-caslon text-headline-lg text-primary mb-2">
+        Why Choose Merakian
+      </h2>
+      <div class="w-16 h-1 bg-primary mx-auto opacity-50"></div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+      {whyUsCards.map((card) => (
+        <div class="bg-charcoal-surface metallic-border rounded-xl p-6 group hover:gold-border transition-all duration-300">
+          <span class="material-symbols-outlined text-primary text-3xl mb-4 block" style="font-variation-settings: 'FILL' 1;">
+            {card.icon}
+          </span>
+          <h3 class="font-hanken-grotesk text-body-lg text-white mb-2 font-bold">
+            {card.title}
+          </h3>
+          <p class="text-on-surface-variant text-sm">
+            {card.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Services Overview -->
+  <section class="py-stack-xl bg-surface-container-lowest border-y border-white/5">
+    <div class="px-6 md:px-margin-mobile lg:px-margin-desktop max-w-container mx-auto">
+      <h2 class="font-libre-caslon text-headline-lg text-white mb-stack-lg">
+        Our Premium Services
+      </h2>
+      <div class="space-y-6">
+        {services.map((service) => (
+          <a href="/services" class="group block">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 group-hover:border-primary transition-colors">
+              <div>
+                <span class="inline-block px-3 py-1 bg-metallic-blue/15 text-secondary text-xs uppercase tracking-wider rounded-sm mb-2">
+                  {service.category}
+                </span>
+                <h3 class="font-libre-caslon text-headline-md text-primary mb-1">
+                  {service.title}
+                </h3>
+                <p class="text-on-surface-variant">
+                  {service.description}
+                </p>
+              </div>
+              <span class="material-symbols-outlined text-white/50 group-hover:text-primary transition-all transform group-hover:translate-x-2">
+                arrow_forward
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- KPI Stats Bar -->
+  <KPIBlock stats={kpiStats} />
+
+  <!-- Compliance Section -->
+  <section class="py-stack-xl px-6 md:px-margin-mobile lg:px-margin-desktop max-w-container mx-auto text-center">
+    <div class="max-w-4xl mx-auto">
+      <span class="material-symbols-outlined text-primary text-4xl mb-4">shield</span>
+      <h2 class="font-libre-caslon text-headline-md text-white mb-4">
+        Compliance & Professional Standards
+      </h2>
+      <p class="text-on-surface-variant mb-4">
+        We operate with absolute integrity and transparency. Merakian Global Services functions as a facilitating entity, coordinating services through a network of specialized, fully registered, and licensed partner organizations.
+      </p>
+      <p class="text-on-surface-variant">
+        While we do not directly hold overarching recruitment or aviation licenses, our rigorous vetting process ensures that all services are delivered by partners who maintain complete compliance with relevant national and international regulations, industry standards, and ethical practices. Your trust and security are paramount in every coordination we undertake.
+      </p>
+    </div>
+  </section>
+</PageLayout>

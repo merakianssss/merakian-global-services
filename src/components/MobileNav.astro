@@ -1,0 +1,109 @@
+---
+const { pathname } = Astro.url;
+const isActive = (path: string) => pathname === path;
+---
+
+<div class="md:hidden">
+  <button
+    id="mobile-menu-button"
+    type="button"
+    class="text-on-surface hover:text-primary transition-colors"
+    aria-label="Open menu"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+  >
+    <span class="material-symbols-outlined text-3xl">menu</span>
+  </button>
+
+  <div
+    id="mobile-menu"
+    class="hidden fixed inset-0 z-50 bg-rich-black/95 backdrop-blur-md flex-col"
+  >
+    <div class="flex items-center justify-between px-6 py-5 border-b border-white/10">
+      <a href="/" class="font-libre-caslon text-headline-md text-primary">
+        Merakian Global
+      </a>
+      <button
+        id="mobile-menu-close"
+        type="button"
+        class="text-on-surface hover:text-primary"
+        aria-label="Close menu"
+      >
+        <span class="material-symbols-outlined text-3xl">close</span>
+      </button>
+    </div>
+
+    <nav class="flex flex-col gap-6 p-8">
+      <a
+        href="/"
+        class={`text-headline-md font-libre-caslon hover:text-primary transition-colors ${isActive('/') ? 'text-primary' : 'text-on-surface'}`}
+      >
+        Home
+      </a>
+      <a
+        href="/services"
+        class={`text-headline-md font-libre-caslon hover:text-primary transition-colors ${isActive('/services') ? 'text-primary' : 'text-on-surface'}`}
+      >
+        Services
+      </a>
+      <a
+        href="/process"
+        class={`text-headline-md font-libre-caslon hover:text-primary transition-colors ${isActive('/process') ? 'text-primary' : 'text-on-surface'}`}
+      >
+        Process
+      </a>
+      <a
+        href="/recruitment"
+        class={`text-headline-md font-libre-caslon hover:text-primary transition-colors ${isActive('/recruitment') ? 'text-primary' : 'text-on-surface'}`}
+      >
+        Recruitment
+      </a>
+      <a
+        href="/contact"
+        class={`text-headline-md font-libre-caslon hover:text-primary transition-colors ${isActive('/contact') ? 'text-primary' : 'text-on-surface'}`}
+      >
+        Contact
+      </a>
+
+      <a
+        href="/contact"
+        class="mt-6 inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-gold-pressed text-rich-black uppercase label-lg font-hanken-grotesk rounded transition-all hover:shadow-[0_0_24px_rgba(242,202,80,0.3)]"
+      >
+        Request Consultation
+      </a>
+    </nav>
+  </div>
+</div>
+
+<script>
+  const button = document.getElementById('mobile-menu-button');
+  const closeButton = document.getElementById('mobile-menu-close');
+  const menu = document.getElementById('mobile-menu');
+  const menuLinks = menu?.querySelectorAll('a');
+
+  function openMenu() {
+    if (!menu || !button) return;
+    menu.classList.remove('hidden');
+    menu.classList.add('flex');
+    button.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    if (!menu || !button) return;
+    menu.classList.add('hidden');
+    menu.classList.remove('flex');
+    button.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  button?.addEventListener('click', openMenu);
+  closeButton?.addEventListener('click', closeMenu);
+  menuLinks?.forEach((link) => link.addEventListener('click', closeMenu));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu?.classList.contains('hidden')) {
+      closeMenu();
+    }
+  });
+</script>

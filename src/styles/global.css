@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Material Symbols Outlined */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Utilities */
+@layer utilities {
+  .flight-path {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #f2ca50 50%,
+      transparent 100%
+    );
+    height: 1px;
+  }
+
+  .metallic-border {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .gold-border {
+    border: 1px solid #f2ca50;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 12px rgba(242, 202, 80, 0.4);
+  }
+
+  .btn-primary-glow {
+    box-shadow: 0 0 24px rgba(242, 202, 80, 0.3);
+  }
+
+  .glass-nav {
+    background-color: rgba(19, 19, 19, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* Base styles */
+html {
+  background-color: #000000;
+  color: #e5e2e1;
+  font-family: 'Hanken Grotesk', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #000000;
+  color: #e5e2e1;
+  min-height: 100vh;
+}
+
+/* Form input underline style */
+.form-input-underline {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e5e2e1;
+  padding: 12px 0;
+  width: 100%;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.form-input-underline:focus {
+  outline: none;
+  border-bottom: 2px solid #f2ca50;
+}
+
+.form-input-underline::placeholder {
+  color: #99907c;
+}
+
+.form-label-floating {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #99907c;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.form-input-underline:focus + .form-label-floating,
+.form-input-underline:not(:placeholder-shown) + .form-label-floating {
+  top: -8px;
+  font-size: 11px;
+  color: #f2ca50;
+}
+
+/* Select styling */
+select.form-input-underline {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2399907c' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0 center;
+  background-size: 16px;
+  padding-right: 24px;
+}
+
+/* Checkbox styling */
+input[type='checkbox'] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+input[type='checkbox']:checked {
+  background-color: #f2ca50;
+  border-color: #f2ca50;
+}
+
+input[type='checkbox']:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000000;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #131313;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4d4635;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #99907c;
+}

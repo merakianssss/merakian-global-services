@@ -1,0 +1,40 @@
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  eyebrow?: string;
+  backgroundImage: string;
+}
+
+const { title, subtitle, eyebrow, backgroundImage } = Astro.props;
+---
+
+<section class="relative min-h-[409px] md:min-h-[60vh] flex items-center justify-center overflow-hidden">
+  <!-- Background Image (decorative) -->
+  <div
+    class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={`background-image: url('${backgroundImage}')`}
+    aria-hidden="true"
+    role="presentation"
+  >
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 bg-rich-black/80"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+    {eyebrow && (
+      <p class="text-label-lg text-primary uppercase mb-4">
+        {eyebrow}
+      </p>
+    )}
+    <h1 class="font-libre-caslon text-display-lg-mobile md:text-display-lg text-on-surface mb-stack-md">
+      {title}
+    </h1>
+    {subtitle && (
+      <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+        {subtitle}
+      </p>
+    )}
+  </div>
+</section>

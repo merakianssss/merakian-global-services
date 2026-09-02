@@ -1,0 +1,180 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/Hero.astro';
+
+const recruitmentSteps = [
+  { number: 1, label: 'Client Requirement', description: 'Deep dive into organizational needs.' },
+  { number: 2, label: 'Candidate Search', description: 'Leveraging global networks.' },
+  { number: 3, label: 'Shortlisting', description: 'Initial candidate evaluation.' },
+  { number: 4, label: 'Document Collection', description: 'Gathering necessary credentials.' },
+  { number: 5, label: 'Screening', description: 'Rigorous vetting process.' },
+  { number: 6, label: 'Interview Coordination', description: 'Scheduling and logistics.' },
+  { number: 7, label: 'Interview Preparation', description: 'Candidate coaching.' },
+  { number: 8, label: 'Selection', description: 'Finalizing the right fit.' },
+  { number: 9, label: 'Joining / Deployment', description: 'Onboarding and logistics.' },
+  { number: 10, label: 'Post-Joining Support', description: 'Ongoing integration assistance.' },
+];
+
+const travelSteps = [
+  { icon: 'flight_takeoff', label: 'Requirement Analysis', description: 'Understanding travel needs and preferences.' },
+  { icon: 'explore', label: 'Itinerary Planning', description: 'Creating optimized travel routes.' },
+  { icon: 'airplane_ticket', label: 'Booking & Ticketing', description: 'Securing flights and accommodations.' },
+  { icon: 'support_agent', label: 'Ongoing Support', description: 'Assistance during transit.' },
+];
+
+const courierSteps = [
+  { icon: 'inventory_2', label: 'Package Assessment', description: 'Evaluating size, weight, and destination.' },
+  { icon: 'local_shipping', label: 'Dispatch & Routing', description: 'Selecting the most efficient delivery method.' },
+  { icon: 'share_location', label: 'Tracking', description: 'Real-time monitoring of shipments.' },
+  { icon: 'task_alt', label: 'Delivery Confirmation', description: 'Proof of successful receipt.' },
+];
+
+const valueProps = [
+  {
+    icon: 'groups',
+    title: 'End-to-End Candidate Support',
+    description: 'From initial screening to final placement, we manage the entire lifecycle, ensuring a premium experience for both client and candidate.',
+  },
+  {
+    icon: 'handshake',
+    title: 'Long-Term Assistance',
+    description: 'Our commitment extends beyond the joining date. We provide ongoing support to ensure successful integration and retention.',
+  },
+  {
+    icon: 'assured_workload',
+    title: 'Candidate-Centric Approach',
+    description: 'We prioritize the well-being and career progression of our candidates, building trust and maintaining an elite talent pool.',
+  },
+];
+---
+
+<PageLayout
+  title="Merakian Global - Recruitment & Manpower"
+  description="Precision recruitment for global leaders. End-to-end recruitment solutions from executive search to large-scale manpower deployment."
+>
+  <section class="relative pt-32 pb-20 px-margin-mobile lg:px-margin-desktop max-w-container mx-auto min-h-[716px] flex items-center">
+    <div class="absolute inset-0 z-0">
+      <div class="bg-cover bg-center w-full h-full opacity-30 mix-blend-luminosity" style="background-image: url('/images/hero-recruitment.jpg');"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-rich-black/80 via-rich-black/50 to-rich-black"></div>
+    </div>
+    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-gutter w-full">
+      <div class="flex flex-col justify-center text-center lg:text-left">
+        <p class="font-hanken-grotesk text-label-lg text-primary uppercase mb-4 tracking-widest font-semibold">
+          Elite Talent Acquisition
+        </p>
+        <h1 class="font-libre-caslon text-display-lg-mobile md:text-display-lg text-white mb-6">
+          Precision Recruitment for <span class="text-primary">Global Leaders</span>
+        </h1>
+        <p class="text-body-lg text-on-surface-variant mb-8 max-w-2xl mx-auto lg:mx-0">
+          Operating as a premium third-party partner, we provide end-to-end recruitment solutions. From executive search to large-scale manpower deployment, we ensure seamless integration of top-tier talent into your organization globally.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a
+            href="/contact"
+            class="bg-gradient-to-r from-primary to-gold-pressed text-rich-black font-hanken-grotesk text-label-lg uppercase px-8 py-4 rounded-sm gold-glow transition-all text-center font-semibold"
+          >
+            Partner With Us
+          </a>
+          <a
+            href="/process"
+            class="border border-white/10 hover:border-primary text-white font-hanken-grotesk text-label-lg uppercase px-8 py-4 rounded-sm transition-all bg-transparent text-center font-semibold"
+          >
+            View Our Process
+          </a>
+        </div>
+      </div>
+      <div class="hidden lg:flex justify-end items-center relative">
+        <div class="w-full h-[500px] metallic-border rounded-lg relative overflow-hidden group">
+          <div class="bg-cover bg-center w-full h-full transition-transform duration-700 group-hover:scale-105" style="background-image: url('/images/recruitment-network.jpg');"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-rich-black via-transparent to-transparent"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Proposition -->
+  <section class="py-stack-xl px-margin-mobile lg:px-margin-desktop max-w-container mx-auto border-t border-white/5 relative">
+    <div class="flight-path absolute top-0 left-0"></div>
+    <div class="text-center mb-stack-xl">
+      <h2 class="font-libre-caslon text-headline-lg text-white mb-4">Supported by Experienced Industry Partners</h2>
+      <p class="text-body-md text-on-surface-variant max-w-2xl mx-auto">
+        We leverage a vast network of global experts to ensure candidate quality and operational excellence.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+      {valueProps.map((prop) => (
+        <div class="bg-charcoal-surface p-8 rounded-lg metallic-border hover:border-primary transition-colors duration-300 group">
+          <span class="material-symbols-outlined text-primary text-4xl mb-6 block" style="font-variation-settings: 'FILL' 1;">
+            {prop.icon}
+          </span>
+          <h3 class="font-libre-caslon text-headline-md text-white mb-3">{prop.title}</h3>
+          <p class="text-body-md text-on-surface-variant group-hover:text-on-surface transition-colors">
+            {prop.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Workflow Diagram Section -->
+  <section class="py-stack-xl px-margin-mobile lg:px-margin-desktop bg-surface-container-low relative">
+    <div class="max-w-container mx-auto">
+      <div class="text-center mb-stack-xl">
+        <p class="font-hanken-grotesk text-label-lg text-primary uppercase mb-2 tracking-widest font-semibold">Our Methodology</p>
+        <h2 class="font-libre-caslon text-headline-lg text-white">The Golden Path of Recruitment</h2>
+      </div>
+      <div class="relative max-w-5xl mx-auto">
+        <div class="absolute left-8 top-0 bottom-0 w-px bg-white/10 md:hidden"></div>
+        <div class="space-y-8 md:space-y-0 md:grid md:grid-cols-2 lg:grid-cols-5 md:gap-y-16 md:gap-x-6">
+          {recruitmentSteps.map((step) => (
+            <div class="relative pl-20 md:pl-0 text-left md:text-center group">
+              <div class="absolute left-4 md:left-1/2 top-0 md:-top-12 -translate-x-1/2 w-8 h-8 rounded-full bg-rich-black border-2 border-primary flex items-center justify-center z-10 group-hover:bg-primary transition-colors">
+                <span class="text-xs text-primary group-hover:text-rich-black font-bold">{step.number}</span>
+              </div>
+              <h4 class="font-hanken-grotesk text-label-lg text-white mb-2 uppercase font-semibold">{step.label}</h4>
+              <p class="text-on-surface-variant text-sm">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Workflows -->
+  <section class="py-stack-xl px-margin-mobile lg:px-margin-desktop bg-surface-container-highest relative">
+    <div class="max-w-container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-xl">
+        <!-- Travel Workflow -->
+        <div>
+          <h3 class="font-libre-caslon text-headline-lg text-primary mb-8 border-b border-white/10 pb-4">Travel Workflow</h3>
+          <ul class="space-y-6">
+            {travelSteps.map((step) => (
+              <li class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1" style="font-variation-settings: 'FILL' 1;">{step.icon}</span>
+                <div>
+                  <h4 class="font-hanken-grotesk text-label-lg text-white uppercase mb-1 font-semibold">{step.label}</h4>
+                  <p class="text-on-surface-variant text-sm">{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <!-- Courier Workflow -->
+        <div>
+          <h3 class="font-libre-caslon text-headline-lg text-primary mb-8 border-b border-white/10 pb-4">Courier Workflow</h3>
+          <ul class="space-y-6">
+            {courierSteps.map((step) => (
+              <li class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1" style="font-variation-settings: 'FILL' 1;">{step.icon}</span>
+                <div>
+                  <h4 class="font-hanken-grotesk text-label-lg text-white uppercase mb-1 font-semibold">{step.label}</h4>
+                  <p class="text-on-surface-variant text-sm">{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

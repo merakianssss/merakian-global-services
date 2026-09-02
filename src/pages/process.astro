@@ -1,0 +1,121 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/Hero.astro';
+import WorkflowStep from '../components/WorkflowStep.astro';
+
+const recruitmentSteps = [
+  { number: 1, label: 'Client Requirement', description: 'Deep dive into organizational needs.' },
+  { number: 2, label: 'Candidate Search', description: 'Leveraging global networks.' },
+  { number: 3, label: 'Shortlisting', description: 'Identifying top-tier talent.' },
+  { number: 4, label: 'Document Collection', description: 'Gathering necessary credentials.' },
+  { number: 5, label: 'Screening', description: 'Rigorous background vetting.' },
+  { number: 6, label: 'Interview Coordination', description: 'Scheduling and logistics.' },
+  { number: 7, label: 'Interview Preparation', description: 'Coaching for success.' },
+  { number: 8, label: 'Selection', description: 'Finalizing the perfect match.' },
+  { number: 9, label: 'Joining/Deployment', description: 'Seamless onboarding process.' },
+  { number: 10, label: 'Post-Joining Support', description: 'Ongoing integration assistance.' },
+];
+
+const travelSteps = [
+  { icon: 'analytics', label: 'Requirement Analysis', description: 'Understanding your travel goals and constraints.' },
+  { icon: 'forum', label: 'Consultation', description: 'Expert guidance on options and routes.' },
+  { icon: 'format_list_bulleted', label: 'Options', description: 'Curated selections of flights and itineraries.' },
+  { icon: 'airplane_ticket', label: 'Booking', description: 'Secure reservations and ticketing.' },
+  { icon: 'support_agent', label: 'Journey Support', description: 'Continuous assistance throughout travel.' },
+];
+
+const courierSteps = [
+  { icon: 'inventory_2', label: 'Package Assessment', description: 'Evaluating contents and routing requirements.' },
+  { icon: 'local_shipping', label: 'Dispatch & Routing', description: 'Optimal path planning and dispatch.' },
+  { icon: 'my_location', label: 'Tracking', description: 'Real-time visibility on shipments.' },
+  { icon: 'check_circle', label: 'Delivery Confirmation', description: 'Proof of delivery and sign-off.' },
+];
+---
+
+<PageLayout
+  title="Merakian Global - Process & Workflows"
+  description="Discover the rigorous methodologies and streamlined processes that drive our recruitment, travel, and logistics operations."
+>
+  <Hero
+    eyebrow="Our Operations"
+    title="Process & <span class='text-primary'>Workflows</span>"
+    subtitle="Discover the rigorous methodologies and streamlined processes that drive our recruitment, travel, and logistics operations. We ensure excellence at every step."
+  />
+
+  <!-- Recruitment Workflow Section -->
+  <section class="py-stack-xl px-margin-mobile lg:px-margin-desktop bg-surface-container-low relative border-t border-white/5">
+    <div class="flight-path absolute top-0 left-0"></div>
+    <div class="max-w-container mx-auto">
+      <div class="text-center mb-stack-xl">
+        <h2 class="font-libre-caslon text-headline-lg text-white mb-4">The 10-Step Recruitment Workflow</h2>
+        <p class="text-body-md text-on-surface-variant max-w-2xl mx-auto">
+          Our comprehensive approach to elite talent acquisition ensures a perfect match for both client and candidate.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        {recruitmentSteps.map((step) => (
+          <div class="bg-charcoal-surface p-6 rounded-lg metallic-border relative group hover:border-primary transition-colors duration-300">
+            <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-rich-black border-2 border-primary flex items-center justify-center z-10 group-hover:bg-primary transition-colors">
+              <span class="text-sm text-primary group-hover:text-rich-black font-bold">{step.number}</span>
+            </div>
+            <h4 class="font-hanken-grotesk text-label-lg text-white mb-2 uppercase mt-2 font-semibold">
+              {step.label}
+            </h4>
+            <p class="text-on-surface-variant text-sm">
+              {step.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Travel Workflow Section -->
+  <section class="py-stack-xl px-margin-mobile lg:px-margin-desktop bg-rich-black relative border-t border-white/5">
+    <div class="max-w-container mx-auto">
+      <div class="text-center mb-stack-xl">
+        <h2 class="font-libre-caslon text-headline-lg text-white mb-4">Travel Workflow</h2>
+        <p class="text-body-md text-on-surface-variant max-w-2xl mx-auto">
+          Ensuring seamless corporate and executive travel arrangements.
+        </p>
+      </div>
+      <div class="flex flex-col md:flex-row justify-between items-stretch gap-8 relative max-w-5xl mx-auto">
+        <div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-white/10 -z-10 transform -translate-y-1/2"></div>
+        {travelSteps.map((step) => (
+          <div class="text-center bg-charcoal-surface p-6 rounded-lg metallic-border w-full md:w-1/5 z-10">
+            <span class="material-symbols-outlined text-primary text-3xl mb-4 block" style="font-variation-settings: 'FILL' 1;">
+              {step.icon}
+            </span>
+            <h4 class="font-hanken-grotesk text-label-lg text-white mb-2 uppercase font-semibold">
+              {step.label}
+            </h4>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Courier Workflow Section -->
+  <section class="py-stack-xl px-margin-mobile lg:px-margin-desktop bg-surface-container-low relative border-t border-white/5">
+    <div class="max-w-container mx-auto">
+      <div class="text-center mb-stack-xl">
+        <h2 class="font-libre-caslon text-headline-lg text-white mb-4">Courier Workflow</h2>
+        <p class="text-body-md text-on-surface-variant max-w-2xl mx-auto">
+          Secure and efficient logistics for essential documentation and packages.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+        {courierSteps.map((step) => (
+          <div class="bg-charcoal-surface p-8 rounded-lg metallic-border text-center hover:border-primary transition-colors duration-300">
+            <div class="w-12 h-12 mx-auto mb-4 rounded-full border border-primary flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary">{step.icon}</span>
+            </div>
+            <h4 class="font-hanken-grotesk text-label-lg text-white mb-2 uppercase font-semibold">
+              {step.label}
+            </h4>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,33 @@
+---
+export interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  href?: string;
+}
+
+const { icon, title, description, href = '/contact' } = Astro.props;
+---
+
+<a
+  href={href}
+  class="group block bg-charcoal-surface metallic-border rounded-lg p-8 transition-all duration-300 hover:gold-border"
+>
+  <div class="mb-stack-md">
+    <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+      <span class="material-symbols-outlined text-primary text-3xl">
+        {icon}
+      </span>
+    </div>
+  </div>
+  <h3 class="font-libre-caslon text-headline-md text-on-surface mb-stack-sm">
+    {title}
+  </h3>
+  <p class="text-body-md text-on-surface-variant mb-stack-md">
+    {description}
+  </p>
+  <span class="inline-flex items-center gap-2 text-label-lg text-primary uppercase group-hover:gap-3 transition-all">
+    Explore Service
+    <span class="material-symbols-outlined text-base">arrow_forward</span>
+  </span>
+</a>

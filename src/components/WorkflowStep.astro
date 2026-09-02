@@ -1,0 +1,33 @@
+---
+export interface Props {
+  number?: number | string;
+  icon?: string;
+  label: string;
+  description: string;
+}
+
+const { number, icon, label, description } = Astro.props;
+---
+
+<div class="flex flex-col items-start gap-stack-md">
+  <div class="flex items-center gap-stack-md">
+    {number && !icon && (
+      <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-gold-pressed flex items-center justify-center text-rich-black font-hanken-grotesk font-semibold text-body-lg">
+        {number}
+      </div>
+    )}
+    {icon && (
+      <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary text-2xl">
+          {icon}
+        </span>
+      </div>
+    )}
+    <h3 class="text-label-lg text-primary uppercase font-hanken-grotesk font-semibold">
+      {label}
+    </h3>
+  </div>
+  <p class="text-body-md text-on-surface-variant pl-0 md:pl-16">
+    {description}
+  </p>
+</div>

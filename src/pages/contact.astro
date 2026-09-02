@@ -1,0 +1,125 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<PageLayout
+  title="Merakian Global - Contact & Consultation"
+  description="Connect with our global network. Start your journey with travel, recruitment, and courier services across GCC, Europe, Asia, and the Americas."
+>
+  <!-- Hero Section -->
+  <section class="relative w-full min-h-[409px] flex flex-col justify-center items-center text-center px-margin-mobile lg:px-margin-desktop py-stack-xl pt-32">
+    <div class="absolute inset-0 z-0" aria-hidden="true" role="presentation">
+      <div class="bg-cover bg-center bg-no-repeat w-full h-full opacity-30 mix-blend-luminosity" style="background-image: url('/images/hero-contact.jpg');"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-rich-black via-rich-black/80 to-rich-black"></div>
+    </div>
+    <div class="relative z-10 max-w-3xl mx-auto">
+      <h1 class="font-libre-caslon text-display-lg-mobile md:text-display-lg text-primary mb-stack-md tracking-tight">
+        Global Network
+      </h1>
+      <p class="text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+        Whether you require sophisticated travel arrangements or strategic career consultation, The Golden Path begins here. Reach out to coordinate your next journey across our global corridors.
+      </p>
+    </div>
+    <div class="flight-path top-full mt-stack-md"></div>
+  </section>
+
+  <!-- Global Reach Section -->
+  <section class="relative max-w-container mx-auto px-margin-mobile lg:px-margin-desktop py-stack-lg z-10 text-center">
+    <div class="mb-12">
+      <h2 class="font-libre-caslon text-headline-lg text-primary mb-4">Our International Reach</h2>
+      <p class="text-body-lg text-on-surface-variant max-w-3xl mx-auto">
+        Operating seamlessly across major global hubs, we provide uninterrupted service through our verified partner networks in the Middle East, Europe, and Asia-Pacific regions.
+      </p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="bg-charcoal-surface p-6 rounded-lg border border-white/5 hover:border-primary/30 transition-colors">
+        <span class="material-symbols-outlined text-primary text-4xl mb-3 block">flight_takeoff</span>
+        <h3 class="font-hanken-grotesk text-label-lg text-on-surface uppercase tracking-wider mb-1 font-semibold">Travel Corridors</h3>
+        <p class="text-body-md text-on-surface-variant">GCC, Europe, Asia, Americas</p>
+      </div>
+      <div class="bg-charcoal-surface p-6 rounded-lg border border-white/5 hover:border-primary/30 transition-colors">
+        <span class="material-symbols-outlined text-primary text-4xl mb-3 block">group</span>
+        <h3 class="font-hanken-grotesk text-label-lg text-on-surface uppercase tracking-wider mb-1 font-semibold">Recruitment Reach</h3>
+        <p class="text-body-md text-on-surface-variant">Global Sourcing & Manpower</p>
+      </div>
+      <div class="bg-charcoal-surface p-6 rounded-lg border border-white/5 hover:border-primary/30 transition-colors">
+        <span class="material-symbols-outlined text-primary text-4xl mb-3 block">local_shipping</span>
+        <h3 class="font-hanken-grotesk text-label-lg text-on-surface uppercase tracking-wider mb-1 font-semibold">Courier Corridors</h3>
+        <p class="text-body-md text-on-surface-variant">Express Delivery & Freight</p>
+      </div>
+      <div class="bg-charcoal-surface p-6 rounded-lg border border-white/5 hover:border-primary/30 transition-colors">
+        <span class="material-symbols-outlined text-primary text-4xl mb-3 block">handshake</span>
+        <h3 class="font-hanken-grotesk text-label-lg text-on-surface uppercase tracking-wider mb-1 font-semibold">Partner Ops</h3>
+        <p class="text-body-md text-on-surface-variant">Verified Global Handlers</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Form Grid -->
+  <section class="relative max-w-container mx-auto px-margin-mobile lg:px-margin-desktop py-stack-lg z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+      <!-- Contact Info Panel (Left) -->
+      <div class="lg:col-span-4 flex flex-col space-y-stack-md">
+        <div class="bg-charcoal-surface p-8 rounded-lg border border-white/10 relative overflow-hidden">
+          <h2 class="font-libre-caslon text-headline-md text-primary mb-6 relative z-10">Direct Line</h2>
+          <div class="space-y-6 relative z-10">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-1">person</span>
+              <div>
+                <p class="font-hanken-grotesk text-label-sm text-on-surface-variant uppercase tracking-wider mb-1 font-semibold">Director</p>
+                <p class="text-body-lg text-on-surface">Dr. Kapil Songara</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-1">phone_iphone</span>
+              <div>
+                <p class="font-hanken-grotesk text-label-sm text-on-surface-variant uppercase tracking-wider mb-1 font-semibold">Phone / WhatsApp</p>
+                <a class="text-body-lg text-on-surface hover:text-primary transition-colors" href="tel:+919819990424">+91 9819990424</a>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-1">mail</span>
+              <div>
+                <p class="font-hanken-grotesk text-label-sm text-on-surface-variant uppercase tracking-wider mb-1 font-semibold">Email</p>
+                <a class="text-body-md text-on-surface hover:text-primary transition-colors" href="mailto:kapil.songara@merakian.net">kapil.songara@merakian.net</a>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-1">language</span>
+              <div>
+                <p class="font-hanken-grotesk text-label-sm text-on-surface-variant uppercase tracking-wider mb-1 font-semibold">Website</p>
+                <a class="text-body-md text-on-surface hover:text-primary transition-colors" href="https://www.merakian.net" target="_blank">www.merakian.net</a>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8 pt-6 border-t border-white/10 relative z-10">
+            <h3 class="font-hanken-grotesk text-label-sm text-on-surface-variant uppercase tracking-wider mb-3 font-semibold">Our Core Services</h3>
+            <ul class="space-y-2">
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                <span class="text-body-md text-on-surface">Travel & Ticketing</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                <span class="text-body-md text-on-surface">Global Recruitment</span>
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                <span class="text-body-md text-on-surface">International Courier</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Enquiry Form (Right) -->
+      <div class="lg:col-span-8 bg-charcoal-surface p-8 rounded-lg border border-white/10">
+        <h2 class="font-libre-caslon text-headline-md text-primary mb-8 border-b border-white/10 pb-4">
+          Smart Consultation Enquiry
+        </h2>
+        <ContactForm />
+      </div>
+    </div>
+  </section>
+</PageLayout>

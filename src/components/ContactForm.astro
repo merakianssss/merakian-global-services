@@ -1,0 +1,506 @@
+---
+// ContactForm component — P2 visual + P3 submission handling
+// Visual: unchanged from P2 (Aura Global dark mode)
+// Submission: fetch to /.netlify/functions/submit-enquiry
+// States: idle / submitting / success / error / validation-error
+// Spam: honeypot field (hidden from users)
+---
+
+<form
+  id="enquiry-form"
+  class="space-y-stack-lg"
+  novalidate
+  action="/.netlify/functions/submit-enquiry"
+  method="POST"
+>
+  <!-- Status region (aria-live, used for state announcements) -->
+  <div
+    id="form-status"
+    role="status"
+    aria-live="polite"
+    class="hidden rounded border p-4 text-body-sm"
+  >
+  </div>
+
+  <!-- Name and Email Row -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+    <div class="relative">
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        placeholder=" "
+        maxlength="120"
+        autocomplete="name"
+        class="form-input-underline peer"
+      />
+      <label for="name" class="form-label-floating">Full Name *</label>
+    </div>
+    <div class="relative">
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        placeholder=" "
+        maxlength="254"
+        autocomplete="email"
+        class="form-input-underline peer"
+      />
+      <label for="email" class="form-label-floating">Email Address *</label>
+    </div>
+  </div>
+
+  <!-- Phone and Country Row -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+    <div class="relative">
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        required
+        placeholder=" "
+        maxlength="40"
+        autocomplete="tel"
+        class="form-input-underline peer"
+      />
+      <label for="phone" class="form-label-floating">Phone Number *</label>
+    </div>
+    <div class="relative">
+      <input
+        type="text"
+        id="country"
+        name="country"
+        placeholder=" "
+        maxlength="80"
+        autocomplete="country-name"
+        class="form-input-underline peer"
+      />
+      <label for="country" class="form-label-floating">Country</label>
+    </div>
+  </div>
+
+  <!-- Company -->
+  <div class="relative">
+    <input
+      type="text"
+      id="company"
+      name="company"
+      placeholder=" "
+      maxlength="120"
+      autocomplete="organization"
+      class="form-input-underline peer"
+    />
+    <label for="company" class="form-label-floating">Company / Organization</label>
+  </div>
+
+  <!-- Service Type -->
+  <div class="relative">
+    <select
+      id="service_type"
+      name="service_type"
+      required
+      class="form-input-underline"
+      onchange="updateFormFields()"
+    >
+      <option value="" disabled selected></option>
+      <optgroup label="Travel & Aviation">
+        <option value="travel_charter">Private Charter</option>
+        <option value="travel_hotel">Hotel & Accommodation</option>
+        <option value="travel_insurance">Travel Insurance</option>
+        <option value="travel_packages">Tour Packages</option>
+      </optgroup>
+      <optgroup label="Recruitment & Manpower">
+        <option value="recruit_manpower">Manpower Solutions</option>
+        <option value="recruit_healthcare">Healthcare Recruitment</option>
+        <option value="recruit_executive">Executive Search</option>
+        <option value="recruit_blue_collar">Blue Collar Hiring</option>
+        <option value="recruit_domestic">Domestic Staffing</option>
+      </optgroup>
+      <optgroup label="Courier & Logistics">
+        <option value="courier_express">Express Courier</option>
+        <option value="courier_international">International Shipping</option>
+        <option value="courier_warehousing">Warehousing</option>
+      </optgroup>
+      <optgroup label="Other">
+        <option value="other">Other Enquiry</option>
+      </optgroup>
+    </select>
+    <label for="service_type" class="form-label-floating">Service Type *</label>
+  </div>
+
+  <!-- Dynamic Fields Container -->
+  <div id="dynamic-fields">
+    <!-- Scope -->
+    <div class="relative mb-stack-md field-scope">
+      <textarea
+        id="scope"
+        name="scope"
+        rows="3"
+        placeholder=" "
+        maxlength="2000"
+        class="form-input-underline peer resize-none"
+      ></textarea>
+      <label for="scope" class="form-label-floating">Scope / Brief Description</label>
+    </div>
+
+    <!-- Headcount -->
+    <div class="relative mb-stack-md field-headcount">
+      <input
+        type="number"
+        id="headcount"
+        name="headcount"
+        min="1"
+        max="100000"
+        placeholder=" "
+        class="form-input-underline peer"
+      />
+      <label for="headcount" class="form-label-floating" id="headcount-label">Number of Personnel</label>
+    </div>
+
+    <!-- Locations Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md field-locations mb-stack-md">
+      <div class="relative">
+        <input
+          type="text"
+          id="origin"
+          name="origin"
+          placeholder=" "
+          maxlength="120"
+          class="form-input-underline peer"
+        />
+        <label for="origin" class="form-label-floating">Origin</label>
+      </div>
+      <div class="relative">
+        <input
+          type="text"
+          id="destination"
+          name="destination"
+          placeholder=" "
+          maxlength="120"
+          class="form-input-underline peer"
+        />
+        <label for="destination" class="form-label-floating">Destination</label>
+      </div>
+    </div>
+
+    <!-- Preferred Date -->
+    <div class="relative mb-stack-md field-date">
+      <input
+        type="date"
+        id="pref_date"
+        name="pref_date"
+        placeholder=" "
+        class="form-input-underline peer"
+      />
+      <label for="pref_date" class="form-label-floating">Preferred Date</label>
+    </div>
+  </div>
+
+  <!-- Message -->
+  <div class="relative">
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows="5"
+      placeholder=" "
+      maxlength="4000"
+      minlength="2"
+      class="form-input-underline peer resize-none"
+    ></textarea>
+    <label for="message" class="form-label-floating">Your Message *</label>
+  </div>
+
+  <!-- Consent -->
+  <div class="flex items-start gap-stack-sm">
+    <input
+      type="checkbox"
+      id="consent"
+      name="consent"
+      required
+      class="mt-1"
+    />
+    <label for="consent" class="text-body-sm text-on-surface-variant cursor-pointer select-none">
+      I consent to Merakian Global Services contacting me regarding this enquiry.
+    </label>
+  </div>
+
+  <!-- Cloudflare Turnstile (only renders when PUBLIC_TURNSTILE_SITE_KEY is set) -->
+  <div
+    id="turnstile-widget"
+    class="cf-turnstile"
+    data-sitekey=""
+    data-callback="onTurnstileSuccess"
+    data-expired-callback="onTurnstileExpired"
+    data-error-callback="onTurnstileError"
+    data-theme="auto"
+    style="display: none;"
+    aria-label="Spam protection verification"
+  ></div>
+  <input
+    type="hidden"
+    id="cf-turnstile-response"
+    name="cf-turnstile-response"
+    value=""
+  />
+
+  <!-- Honeypot (hidden from real users via aria + CSS; bots auto-fill) -->
+  <div
+    aria-hidden="true"
+    style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;"
+  >
+    <label for="website">Website (leave blank)</label>
+    <input
+      type="text"
+      id="website"
+      name="website"
+      tabindex="-1"
+      autocomplete="off"
+    />
+  </div>
+
+  <!-- Submit -->
+  <div>
+    <button
+      type="submit"
+      id="submit-btn"
+      class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-primary to-gold-pressed text-rich-black uppercase label-lg font-hanken-grotesk font-semibold rounded transition-all hover:btn-primary-glow w-full md:w-auto disabled:opacity-60 disabled:cursor-not-allowed"
+    >
+      <span id="submit-label">Submit Enquiry</span>
+      <svg
+        id="submit-spinner"
+        class="hidden ml-3 animate-spin h-5 w-5 text-rich-black"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </button>
+  </div>
+</form>
+
+<script>
+  // ─── Cloudflare Turnstile (P5) ──────────────────────────────────
+  // Site key is exposed via window.__TURNSTILE_SITE_KEY__ (set in BaseLayout)
+  // Widget is loaded only when a key is configured. The form is fully
+  // usable in development without a key — submission will simply omit
+  // the cf-turnstile-response field, and the server silently skips
+  // Turnstile verification when TURNSTILE_SECRET is unset.
+
+  function loadTurnstileScript(siteKey: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      if (document.getElementById('cf-turnstile-script')) {
+        resolve();
+        return;
+      }
+      const s = document.createElement('script');
+      s.id = 'cf-turnstile-script';
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit';
+      s.async = true;
+      s.defer = true;
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error('Failed to load Turnstile'));
+      document.head.appendChild(s);
+    });
+  }
+
+  async function initTurnstile() {
+    const siteKey = (window as any).__TURNSTILE_SITE_KEY__;
+    const widgetEl = document.getElementById('turnstile-widget') as HTMLElement | null;
+    if (!widgetEl) return;
+
+    if (!siteKey || typeof siteKey !== 'string') {
+      // Not configured — keep widget hidden, form remains submittable.
+      return;
+    }
+
+    widgetEl.setAttribute('data-sitekey', siteKey);
+    widgetEl.style.display = '';
+
+    try {
+      await loadTurnstileScript(siteKey);
+    } catch (err) {
+      // If Turnstile fails to load, keep the form usable (silent fail).
+      // Server-side honeypot + rate limit + origin checks still apply.
+      console.warn('Turnstile script failed to load:', err);
+    }
+  }
+
+  // Global callbacks (must be on window — Turnstile calls them by name).
+  (window as any).onTurnstileLoad = function () {
+    const widgetEl = document.getElementById('turnstile-widget') as HTMLElement | null;
+    const siteKey = (window as any).__TURNSTILE_SITE_KEY__;
+    if (widgetEl && siteKey && (window as any).turnstile) {
+      try {
+        (window as any).turnstile.render(widgetEl, {
+          sitekey: siteKey,
+          callback: 'onTurnstileSuccess',
+          'expired-callback': 'onTurnstileExpired',
+          'error-callback': 'onTurnstileError',
+          theme: 'auto',
+        });
+      } catch (err) {
+        console.warn('Turnstile render failed:', err);
+      }
+    }
+  };
+
+  (window as any).onTurnstileSuccess = function (token: string) {
+    const hidden = document.getElementById('cf-turnstile-response') as HTMLInputElement | null;
+    if (hidden) hidden.value = token || '';
+  };
+
+  (window as any).onTurnstileExpired = function () {
+    const hidden = document.getElementById('cf-turnstile-response') as HTMLInputElement | null;
+    if (hidden) hidden.value = '';
+  };
+
+  (window as any).onTurnstileError = function () {
+    const hidden = document.getElementById('cf-turnstile-response') as HTMLInputElement | null;
+    if (hidden) hidden.value = '';
+  };
+
+  // ─── Dynamic form fields (P2) ──────────────────────────────────
+  function updateFormFields() {
+    const serviceType = (document.getElementById('service_type') as HTMLSelectElement)?.value;
+    const fieldsScope = document.querySelectorAll('.field-scope');
+    const fieldsHeadcount = document.querySelectorAll('.field-headcount');
+    const fieldsLocations = document.querySelectorAll('.field-locations');
+    const fieldsDate = document.querySelectorAll('.field-date');
+    const headcountLabel = document.getElementById('headcount-label');
+
+    fieldsScope.forEach((el) => ((el as HTMLElement).style.display = 'block'));
+    fieldsHeadcount.forEach((el) => ((el as HTMLElement).style.display = 'block'));
+    fieldsLocations.forEach((el) => ((el as HTMLElement).style.display = 'block'));
+    fieldsDate.forEach((el) => ((el as HTMLElement).style.display = 'block'));
+
+    if (!serviceType) return;
+
+    if (serviceType.startsWith('recruit_')) {
+      if (headcountLabel) headcountLabel.textContent = 'Number of Personnel Required';
+    } else if (serviceType === 'travel_packages' || serviceType === 'travel_charter') {
+      if (headcountLabel) headcountLabel.textContent = 'Number of Travellers';
+    } else {
+      if (headcountLabel) headcountLabel.textContent = 'Quantity / Volume';
+    }
+  }
+
+  // ─── Form submission handling (P3) ─────────────────────────────
+  type FormState = 'idle' | 'submitting' | 'success' | 'error';
+
+  function setFormState(state: FormState, message?: string) {
+    const form = document.getElementById('enquiry-form') as HTMLFormElement | null;
+    const statusEl = document.getElementById('form-status');
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+    const submitLabel = document.getElementById('submit-label');
+    const submitSpinner = document.getElementById('submit-spinner');
+    if (!form || !statusEl || !submitBtn || !submitLabel || !submitSpinner) return;
+
+    // Reset
+    statusEl.className = 'hidden rounded border p-4 text-body-sm';
+    statusEl.textContent = '';
+
+    if (state === 'submitting') {
+      submitBtn.disabled = true;
+      submitLabel.textContent = 'Sending…';
+      submitSpinner.classList.remove('hidden');
+      form.setAttribute('aria-busy', 'true');
+      return;
+    }
+
+    // Re-enable button for non-submitting states
+    submitBtn.disabled = false;
+    submitLabel.textContent = 'Submit Enquiry';
+    submitSpinner.classList.add('hidden');
+    form.setAttribute('aria-busy', 'false');
+
+    if (state === 'success') {
+      statusEl.className =
+        'rounded border border-primary/40 bg-primary/5 text-on-surface p-4 text-body-sm';
+      statusEl.textContent =
+        message || 'Your enquiry has been received. We will respond within 1 business day.';
+      form.reset();
+      updateFormFields();
+    } else if (state === 'error') {
+      statusEl.className =
+        'rounded border border-error/40 bg-error/10 text-on-surface p-4 text-body-sm';
+      statusEl.textContent =
+        message || 'Something went wrong. Please try again or contact us directly.';
+    }
+
+    if (state === 'success' || state === 'error') {
+      statusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  function clientValidate(form: HTMLFormElement): string | null {
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const phone = String(data.get('phone') || '').trim();
+    const service = String(data.get('service_type') || '');
+    const message = String(data.get('message') || '').trim();
+    const consent = data.get('consent');
+
+    if (name.length < 2) return 'Please enter your full name.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Please enter a valid email address.';
+    if (phone.length < 6) return 'Please enter a valid phone number.';
+    if (!service) return 'Please select a service type.';
+    if (message.length < 2) return 'Please add a brief message.';
+    if (!consent) return 'Please confirm consent to be contacted.';
+
+    // Optional: phone digit sanity
+    if (!/^[+\d\s().-]+$/.test(phone)) return 'Phone number contains invalid characters.';
+
+    return null;
+  }
+
+  async function handleSubmit(e: Event) {
+    e.preventDefault();
+    const form = e.currentTarget as HTMLFormElement;
+    const clientError = clientValidate(form);
+    if (clientError) {
+      setFormState('error', clientError);
+      return;
+    }
+    setFormState('submitting');
+
+    try {
+      const res = await fetch('/.netlify/functions/submit-enquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form).entries())),
+      });
+      let json: any = {};
+      try { json = await res.json(); } catch { /* ignore */ }
+
+      if (res.ok && json.ok) {
+        setFormState('success', json.message);
+      } else {
+        setFormState('error', json.error || `Submission failed (${res.status}). Please try again.`);
+      }
+    } catch (err) {
+      setFormState('error', 'Network error. Please check your connection and try again.');
+    }
+  }
+
+  // Bind handlers
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('enquiry-form') as HTMLFormElement | null;
+    if (!form) return;
+    form.addEventListener('submit', handleSubmit);
+    updateFormFields();
+    initTurnstile();
+  });
+
+  // Re-run dynamic field logic on initial load (in case DOMContentLoaded
+  // already fired before this script executed)
+  if (document.readyState !== 'loading') {
+    updateFormFields();
+    initTurnstile();
+  }
+</script>

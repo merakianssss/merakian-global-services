@@ -1,0 +1,33 @@
+---
+export interface Stat {
+  value: string;
+  label: string;
+}
+
+export interface Props {
+  stats: Stat[];
+}
+
+const { stats } = Astro.props;
+---
+
+<div class="bg-surface-container py-stack-lg">
+  <div
+    class="max-w-container mx-auto px-6 md:px-margin-mobile lg:px-margin-desktop"
+  >
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-stack-md">
+      {stats.map((stat) => (
+        <div class="text-center py-stack-md border-t border-b border-white/10">
+          <div
+            class={`font-libre-caslon text-display-lg-mobile text-primary mb-1 ${stat.value === '[Pending]' ? 'text-on-surface-variant italic' : ''}`}
+          >
+            {stat.value}
+          </div>
+          <div class="text-label-sm text-on-surface-variant uppercase">
+            {stat.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
